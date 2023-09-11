@@ -2,6 +2,7 @@
 using System.Security.Claims;
 using System.Text;
 using api_desenvolvimento_web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -25,12 +26,12 @@ namespace api_desenvolvimento_web.Controllers
 
         }
         [HttpPost]
-        [Route("register")]
+        [Route("cadastrar")]
         public async Task<IActionResult> CadastrarUsuarioAsync([FromBody] CriarUsuarioModel model)
         {
-            var userExists = await _userManager.FindByEmailAsync(model.NomeUsuario);
+            var UsuarioExiste = await _userManager.FindByEmailAsync(model.Email);
 
-            if (userExists is not null)
+            if (UsuarioExiste is not null)
                 return StatusCode(
                     StatusCodes.Status500InternalServerError,
                     new RespostaModel { Success = false, Message = "Usuário já existe!" }
@@ -43,9 +44,9 @@ namespace api_desenvolvimento_web.Controllers
                 UserName = model.NomeUsuario
             };
 
-            var result = await _userManager.CreateAsync(user, model.Senha);
+            var resultado = await _userManager.CreateAsync(user, model.Senha);
 
-            if (!result.Succeeded)
+            if (!resultado.Succeeded)
                 return StatusCode(
                     StatusCodes.Status500InternalServerError,
                     new RespostaModel { Success = false, Message = "Erro ao criar usuário" }
@@ -58,18 +59,18 @@ namespace api_desenvolvimento_web.Controllers
         [Route("login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginModel model)
         {
-            var user = await _userManager.FindByNameAsync(model.NomeUsuario);
+            var usuario = await _userManager.FindByNameAsync(model.NomeUsuario);
 
-            if (user is not null && await _userManager.CheckPasswordAsync(user, model.Senha))
+            if (usuario is not null && await _userManager.CheckPasswordAsync(usuario, model.Senha))
             {
 
                 var authClaims = new List<Claim>
             {
-                new (ClaimTypes.Name, user.UserName),
+                new (ClaimTypes.Name, usuario.UserName),
                 new (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
-                var userRoles = await _userManager.GetRolesAsync(user);
+                var userRoles = await _userManager.GetRolesAsync(usuario);
 
                 foreach (var userRole in userRoles)
                     authClaims.Add(new(ClaimTypes.Role, userRole));
@@ -80,24 +81,50 @@ namespace api_desenvolvimento_web.Controllers
             return Unauthorized();
         }
 
+        [HttpPost("resetar-senha")]
+        public async Task<IActionResult> ResetarSenha([FromBody] ResetarSenhaModel resetarsenha)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { success = false, data = ModelState });
+            }
+
+            var usuario = await _userManager.FindByNameAsync(resetarsenha.NomeUsuario);
+
+            var resultadoLogin = await _userManager.CheckPasswordAsync(usuario, resetarsenha.SenhaAntiga);
+
+            if (!resultadoLogin)
+            {
+                return BadRequest(new { success = false, message = "Usuario ou senha errado!" });
+            }
+
+            var resultadoChange = await _userManager.ChangePasswordAsync(usuario, resetarsenha.SenhaAntiga, resetarsenha.NovaSenha);
+
+            if (resultadoChange.Succeeded)
+            {
+                return Ok(new
+                {
+                    success = true,
+                    message = "Senha alterada com sucesso!",
+                });
+            }
+
+            return BadRequest(new
+            {
+                success = false,
+                erros = resultadoChange.Errors,
+            });
+        }
+
+        [Authorize]
+        [HttpGet("token-e-valido")]
+        public IActionResult TokenEValido() 
+        {
+            return Ok();
+        }
+
         private TokenModel ObterToken(List<Claim> authClaims)
         {
-            //var authSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-
-            //var token = new JwtSecurityToken(
-            //    issuer: _configuration["JWT:ValidIssuer"],
-            //    audience: _configuration["JWT:ValidAudience"],
-            //    expires: DateTime.Now.AddHours(1),
-            //    claims: authClaims,
-            //    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-            //);
-
-            //return new()
-            //{
-            //    Token = new JwtSecurityTokenHandler().WriteToken(token),
-            //    ValidTo = token.ValidTo
-            //};
-
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_configuration.GetSection("JWT").GetSection("Secret").Value);
 
@@ -121,8 +148,6 @@ namespace api_desenvolvimento_web.Controllers
                 Token = tokenHandler.WriteToken(token),
                 ValidTo = token.ValidTo
             };
-
-            //return tokenHandler.WriteToken(token);
         }
     }
 }
