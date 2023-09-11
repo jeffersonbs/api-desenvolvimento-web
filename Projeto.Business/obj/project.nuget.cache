@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "XkIpoEKpPRXNdKU/OCa4zgSKyKfvTItWidjyUxRxF636VqQ1w/MLkiVxb86LNs8Yt4AMoGQh3HSFQNXB1MmzYA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Business\\Projeto.Business.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1803",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Você está executando a operação 'restore' com uma fonte 'HTTP', 'http://s-apl01:8088/nuget'. O acesso não HTTPS será removido em uma versão futura. Considere migrar para uma fonte 'HTTPS'."
+    }
+  ]
+}
