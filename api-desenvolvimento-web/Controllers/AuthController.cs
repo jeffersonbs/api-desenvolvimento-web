@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using api_desenvolvimento_web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -81,22 +82,47 @@ namespace api_desenvolvimento_web.Controllers
 
         private TokenModel ObterToken(List<Claim> authClaims)
         {
-            var authSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
+            //var authSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:ValidIssuer"],
-                audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddHours(1),
-                claims: authClaims,
-                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-            );
+            //var token = new JwtSecurityToken(
+            //    issuer: _configuration["JWT:ValidIssuer"],
+            //    audience: _configuration["JWT:ValidAudience"],
+            //    expires: DateTime.Now.AddHours(1),
+            //    claims: authClaims,
+            //    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+            //);
+
+            //return new()
+            //{
+            //    Token = new JwtSecurityTokenHandler().WriteToken(token),
+            //    ValidTo = token.ValidTo
+            //};
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes(_configuration.GetSection("JWT").GetSection("Secret").Value);
+
+            var claimsidentity = new ClaimsIdentity();
+
+            claimsidentity.AddClaims(authClaims);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = claimsidentity,
+                Issuer = _configuration.GetSection("JWT").GetSection("ValidIssuer").Value,
+                Audience = _configuration.GetSection("JWT").GetSection("ValidAudience").Value,
+                Expires = DateTime.UtcNow.AddHours(int.Parse(_configuration.GetSection("JWT").GetSection("ExpirationHours").Value)),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return new()
             {
-                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                Token = tokenHandler.WriteToken(token),
                 ValidTo = token.ValidTo
             };
 
+            //return tokenHandler.WriteToken(token);
         }
     }
 }
