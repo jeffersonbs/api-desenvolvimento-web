@@ -4,13 +4,13 @@ namespace api_desenvolvimento_web.Models
 {
     public class ResetarSenhaModel
     {
-        [Required(ErrorMessage = "Nome de usuario é obrigatório!")]
+        [Required]
         public string NomeUsuario { get; set; }
 
-        [Required(ErrorMessage = "Senha antiga é obrigatório!")]
+        [Required]
         public string SenhaAntiga { get; set; }
 
-        [Required(ErrorMessage = "Nova senha é obrigatório!")]
+        [Required]
         public string NovaSenha { get; set; }
     }
 }

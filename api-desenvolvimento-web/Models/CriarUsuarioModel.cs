@@ -4,14 +4,14 @@ namespace api_desenvolvimento_web.Models
 {
     public class CriarUsuarioModel
     {
-        [Required(ErrorMessage = "Nome de usuario é obrigatório!")]
+        [Required]
         public string? NomeUsuario { get; set; }
 
         [EmailAddress]
-        [Required(ErrorMessage = "Email é obrigatório!")]
+        [Required]
         public string? Email { get; set; }
 
-        [Required(ErrorMessage = "Senha é obrigatório!")]
+        [Required]
         public string? Senha { get; set; }
     }
 }

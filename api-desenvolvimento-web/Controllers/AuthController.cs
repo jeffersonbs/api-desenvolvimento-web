@@ -1,7 +1,9 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using api_desenvolvimento_web.DTO;
 using api_desenvolvimento_web.Models;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,21 +16,26 @@ namespace api_desenvolvimento_web.Controllers
         private readonly IConfiguration _configuration;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IMapper _mapper;
 
         public AuthController(
             IConfiguration configuration,
             UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IMapper mapper)
         {
             _configuration = configuration;
             _userManager = userManager;
             _roleManager = roleManager;
+            _mapper = mapper;
 
         }
         [HttpPost]
         [Route("cadastrar")]
-        public async Task<IActionResult> CadastrarUsuarioAsync([FromBody] CriarUsuarioModel model)
+        public async Task<IActionResult> CadastrarUsuarioAsync([FromBody] CriarUsuarioDTO criarusuariodto)
         {
+            var model = _mapper.Map<CriarUsuarioModel>(criarusuariodto);
+
             var UsuarioExiste = await _userManager.FindByEmailAsync(model.Email);
 
             if (UsuarioExiste is not null)
@@ -57,8 +64,10 @@ namespace api_desenvolvimento_web.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> LoginAsync([FromBody] LoginModel model)
+        public async Task<IActionResult> LoginAsync([FromBody] LoginDTO logindto)
         {
+            var model = _mapper.Map<LoginModel>(logindto);
+
             var usuario = await _userManager.FindByNameAsync(model.NomeUsuario);
 
             if (usuario is not null && await _userManager.CheckPasswordAsync(usuario, model.Senha))
@@ -82,12 +91,14 @@ namespace api_desenvolvimento_web.Controllers
         }
 
         [HttpPost("resetar-senha")]
-        public async Task<IActionResult> ResetarSenha([FromBody] ResetarSenhaModel resetarsenha)
+        public async Task<IActionResult> ResetarSenha([FromBody] ResetarSenhaModel resetarsenhadto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { success = false, data = ModelState });
             }
+
+            var resetarsenha = _mapper.Map<ResetarSenhaModel>(resetarsenhadto);
 
             var usuario = await _userManager.FindByNameAsync(resetarsenha.NomeUsuario);
 

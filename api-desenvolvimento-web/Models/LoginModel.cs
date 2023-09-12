@@ -4,10 +4,10 @@ namespace api_desenvolvimento_web.Models
 {
     public class LoginModel
     {
-        [Required(ErrorMessage = "Nome de usuario é obrigatório!")]
+        [Required]
         public string? NomeUsuario { get; set; }
 
-        [Required(ErrorMessage = "Senha é obrigatório!")]
+        [Required]
         public string? Senha { get; set; }
     }
 }
