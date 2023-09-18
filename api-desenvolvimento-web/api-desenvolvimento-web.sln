@@ -5,6 +5,7 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projeto.API", "Projeto.API.csproj", "{17A7B76B-CFB1-4EE9-AD8F-F673B21095A3}"
 	ProjectSection(ProjectDependencies) = postProject
+		{5C4A91CF-181C-48D7-A741-299024EB412D} = {5C4A91CF-181C-48D7-A741-299024EB412D}
 		{BC84FF3C-88A8-4594-A3DD-F64698CA6863} = {BC84FF3C-88A8-4594-A3DD-F64698CA6863}
 	EndProjectSection
 EndProject
@@ -13,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projeto.Data", "..\Projeto.
 		{5C4A91CF-181C-48D7-A741-299024EB412D} = {5C4A91CF-181C-48D7-A741-299024EB412D}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projeto.Business", "..\Projeto.Business\Projeto.Business.csproj", "{5C4A91CF-181C-48D7-A741-299024EB412D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Projeto.Business", "..\Projeto.Business\Projeto.Business.csproj", "{5C4A91CF-181C-48D7-A741-299024EB412D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

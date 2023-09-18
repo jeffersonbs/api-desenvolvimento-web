@@ -4,14 +4,14 @@
     "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Infraestrutura\\Projeto.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Infraestrutura\\Projeto.Data.csproj": {
+    "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Business\\Projeto.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Infraestrutura\\Projeto.Data.csproj",
-        "projectName": "Projeto.Data",
-        "projectPath": "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Infraestrutura\\Projeto.Data.csproj",
+        "projectUniqueName": "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Business\\Projeto.Business.csproj",
+        "projectName": "Projeto.Business",
+        "projectPath": "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Business\\Projeto.Business.csproj",
         "packagesPath": "C:\\Users\\l4967\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Infraestrutura\\obj\\",
+        "outputPath": "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Business\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\l4967\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,8 +40,92 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Infraestrutura\\Projeto.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Infraestrutura\\Projeto.Data.csproj",
+        "projectName": "Projeto.Data",
+        "projectPath": "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Infraestrutura\\Projeto.Data.csproj",
+        "packagesPath": "C:\\Users\\l4967\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Infraestrutura\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\l4967\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://s-apl01:8088/nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Business\\Projeto.Business.csproj": {
+                "projectPath": "C:\\Users\\l4967\\source\\repos\\api-desenvolvimento-web\\Projeto.Business\\Projeto.Business.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.21, )"
+            },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.21, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.21, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.21, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.21, )"
             }
