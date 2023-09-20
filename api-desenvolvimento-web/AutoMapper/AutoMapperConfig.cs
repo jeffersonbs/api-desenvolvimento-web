@@ -1,6 +1,7 @@
 ﻿using api_desenvolvimento_web.DTO;
 using api_desenvolvimento_web.Models;
 using AutoMapper;
+using Projeto.Business.Models;
 
 namespace api_desenvolvimento_web.AutoMapper
 {
@@ -11,6 +12,8 @@ namespace api_desenvolvimento_web.AutoMapper
             CreateMap<CriarUsuarioModel, CriarUsuarioDTO>().ReverseMap();
             CreateMap<LoginModel, LoginDTO>().ReverseMap();
             CreateMap<ResetarSenhaModel, ResetarSenhaDTO>().ReverseMap();
+            CreateMap<Paciente, CriarPacienteDTO>().ReverseMap();
+            CreateMap<Paciente, AtualizarPacienteDTO>().ReverseMap();
         }
     }
 }

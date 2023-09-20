@@ -1,4 +1,6 @@
-﻿namespace Projeto.Business.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Projeto.Business.Models
 {
     public class Endereco
     {
@@ -18,7 +20,8 @@
 
         public string Estado { get; set; }
 
-        public Paciente Paciente { get; set; }
+        [JsonIgnore]
+        public Paciente? Paciente { get; set; }
 
     }
 }

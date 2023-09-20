@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Projeto.Business.Interfaces;
+using Projeto.Data.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,6 +74,9 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<ApplicationDbContext>();
+builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 
 var app = builder.Build();
 

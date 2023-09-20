@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Projeto.Data.Context;
 
 namespace api_desenvolvimento_web.Controllers
 {
@@ -28,7 +29,6 @@ namespace api_desenvolvimento_web.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
-
         }
         [HttpPost]
         [Route("cadastrar")]
