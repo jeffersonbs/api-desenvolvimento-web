@@ -7,6 +7,8 @@
         public string NumeroCarteira { get; set; }
         public double? PesoPaciente { get; set; }
         public double? AlturaPaciente { get; set; }
+        public bool Aberto { get; set; }
+        public DateTime? DataFim { get; set; }
         public Paciente Paciente { get; set; }
         public Profissional Profissional { get; set; }
     }
