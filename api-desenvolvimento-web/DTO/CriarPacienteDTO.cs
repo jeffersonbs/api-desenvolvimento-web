@@ -19,4 +19,12 @@ namespace api_desenvolvimento_web.DTO
         public int? EnderecoId { get; set; }
         public ICollection<Atendimento>? Atendimentos { get; private set; }
     }
+
+    public class CriarProfissionalDTO
+    {
+        public string Nome { get; set; }
+        public string NumeroConselho { get; set; }
+        public string UFConselho { get; set; }
+        public string Especialidade { get; set; }
+    }
 }

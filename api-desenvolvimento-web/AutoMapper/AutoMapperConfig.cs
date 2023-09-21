@@ -16,6 +16,8 @@ namespace api_desenvolvimento_web.AutoMapper
             CreateMap<Paciente, AtualizarPacienteDTO>().ReverseMap();
             CreateMap<Endereco, CriarEndereco>().ReverseMap();
             CreateMap<Endereco, AtualizarEnderecoDTO>().ReverseMap();
+            CreateMap<Profissional, CriarProfissionalDTO>().ReverseMap();
+            CreateMap<Profissional, AtualizarProfissionalDTO>().ReverseMap();
         }
     }
 }

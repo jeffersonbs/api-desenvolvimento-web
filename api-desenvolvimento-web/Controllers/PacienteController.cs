@@ -15,14 +15,11 @@ namespace api_desenvolvimento_web.Controllers
     [Authorize]
     public class PacienteController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly IPacienteRepository _pacienterepository;
         private readonly IMapper _mapper;
-        public PacienteController(ApplicationDbContext context
-            ,IPacienteRepository pacienterepository
+        public PacienteController(IPacienteRepository pacienterepository
             , IMapper mapper)
         {
-            _context = context;
             _pacienterepository = pacienterepository;
             _mapper = mapper;
         }
@@ -44,7 +41,7 @@ namespace api_desenvolvimento_web.Controllers
 
             if(paciente == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
             return Ok(paciente);
