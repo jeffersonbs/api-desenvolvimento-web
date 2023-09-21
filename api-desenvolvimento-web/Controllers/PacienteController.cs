@@ -1,6 +1,7 @@
 ﻿using api_desenvolvimento_web.DTO;
 using AutoMapper;
 using AutoMapper.Configuration.Conventions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto.Business.Interfaces;
 using Projeto.Business.Models;
@@ -11,6 +12,7 @@ namespace api_desenvolvimento_web.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class PacienteController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -102,6 +104,35 @@ namespace api_desenvolvimento_web.Controllers
 
             _pacienterepository.Deletar(paciente);
             return Ok();
+        }
+        [HttpPost]
+        [Route("atualizarendereco")]
+        public async Task<IActionResult> CadastrarEndereco(AtualizarEnderecoDTO endereco)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var enderecoentidade = await _pacienterepository.ObterEnderecoPorId((int)endereco.Id);
+
+            if (enderecoentidade == null)
+            {
+                return BadRequest();
+            }
+
+            enderecoentidade.Logradouro = endereco.Logradouro ?? enderecoentidade.Logradouro;
+            enderecoentidade.Numero = endereco.Numero ?? enderecoentidade.Numero;
+            enderecoentidade.Complemento = endereco.Complemento ?? enderecoentidade.Complemento;
+            enderecoentidade.Cep = endereco.Cep ?? enderecoentidade.Cep;
+            enderecoentidade.Bairro = endereco.Bairro ?? enderecoentidade.Bairro;
+            enderecoentidade.Cidade = endereco.Cidade ?? enderecoentidade.Cidade;
+            enderecoentidade.Estado = endereco.Estado ?? enderecoentidade.Estado;
+            enderecoentidade.Paciente = endereco.Paciente ?? enderecoentidade.Paciente;
+
+            _pacienterepository.AtualizarEndereco(enderecoentidade);
+
+            return Ok(enderecoentidade);
         }
     }
 }

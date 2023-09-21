@@ -15,7 +15,7 @@ namespace api_desenvolvimento_web.DTO
         public string? NomePai { get; set; }
         public string? NomeMae { get; set; }
         public string? NumeroFone { get; set; }
-        public Endereco? Endereco { get; set; }
+        public CriarEndereco? Endereco { get; set; }
         public int? EnderecoId { get; set; }
         public ICollection<Atendimento>? Atendimentos { get; private set; }
     }

@@ -27,7 +27,7 @@ namespace Projeto.Data.Repository
 
         public async Task<List<Paciente>> ListarPacientes()
         {
-           return await _contexto.Pacientes.ToListAsync();
+           return await _contexto.Pacientes.Include(x => x.Endereco).ToListAsync();
         }
         public void Dispose()
         {
@@ -49,6 +49,17 @@ namespace Projeto.Data.Repository
         { 
             _contexto.Pacientes.Remove(paciente);
             _contexto.SaveChanges();
+        }
+
+        public async Task AtualizarEndereco(Endereco endereco)
+        {
+            _contexto.Update(endereco);
+            _contexto.SaveChanges();
+        }
+
+        public async Task<Endereco> ObterEnderecoPorId(int id)
+        {
+            return await _contexto.Enderecos.FindAsync(id);
         }
     }
 }

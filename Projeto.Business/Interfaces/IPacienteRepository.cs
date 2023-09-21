@@ -14,5 +14,7 @@ namespace Projeto.Business.Interfaces
         Task Adicionar(Paciente paciente);
         Task Atualizar(Paciente paciente);
         Task Deletar(Paciente paciente);
+        Task AtualizarEndereco(Endereco endereco);
+        Task<Endereco> ObterEnderecoPorId(int id);
     }
 }
