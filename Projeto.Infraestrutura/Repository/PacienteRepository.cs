@@ -27,7 +27,10 @@ namespace Projeto.Data.Repository
 
         public async Task<List<Paciente>> ListarPacientes()
         {
-           return await _contexto.Pacientes.Include(x => x.Endereco).ToListAsync();
+           return await _contexto.Pacientes
+                .Include(x => x.Endereco)
+                .Include(x => x.Diagnostico)
+                .ToListAsync();
         }
         public void Dispose()
         {

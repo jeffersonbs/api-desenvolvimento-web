@@ -11,7 +11,7 @@ namespace api_desenvolvimento_web.Controllers
     [ApiController]
     [Route("[controller]")]
     [Authorize]
-    public class CIDController : Controller
+    public class CIDController : ControllerBase
     {
         private readonly ICIDRepository _cidrepository;
         private readonly IMapper _mapper;
@@ -52,12 +52,12 @@ namespace api_desenvolvimento_web.Controllers
             var model = _mapper.Map<CID>(cid);
             _cidrepository.Adicionar(model);
 
-            return Ok(model);
+            return Created("CID cadastrado com sucesso", model);
         }
 
         [HttpPut]
         [Route("atualizarcid")]
-        public async Task<IActionResult> AtualizarCID(AtualizarCID cid)
+        public async Task<IActionResult> AtualizarCID(AtualizarCIDDTO cid)
         {
             if (!ModelState.IsValid)
             {

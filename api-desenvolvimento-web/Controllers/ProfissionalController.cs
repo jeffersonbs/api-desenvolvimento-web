@@ -52,7 +52,7 @@ namespace api_desenvolvimento_web.Controllers
             var model = _mapper.Map<Profissional>(profissional);
             _profissionalrepository.Adicionar(model);
 
-            return Ok(profissional);
+            return Created("Profissional cadastrado com sucesso",profissional);
         }
 
         [HttpPut]

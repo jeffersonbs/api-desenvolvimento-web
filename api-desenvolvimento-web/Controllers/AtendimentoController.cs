@@ -52,7 +52,7 @@ namespace api_desenvolvimento_web.Controllers
             var model = _mapper.Map<Atendimento>(atendimento);
             _atendimentorepository.Adicionar(model);
 
-            return Ok(model);
+            return Created("Atendimento cadastrado com sucesso",model);
         }
 
         [HttpPut]

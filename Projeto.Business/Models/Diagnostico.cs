@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public DateTime DataDiagnostico { get; set; }
+        public int PacienteId { get; set; }
         public ICollection<CID> CIDs { get; private set; }
     }
 }

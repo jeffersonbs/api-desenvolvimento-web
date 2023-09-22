@@ -80,6 +80,7 @@ builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 builder.Services.AddScoped<IProfissionalRepository, ProfissionalRepository>();
 builder.Services.AddScoped<IAtendimentoRepository, AtendimentoRepository>();
 builder.Services.AddScoped<ICIDRepository, CIDRepository>();
+builder.Services.AddScoped<IDiagnosticoRepository, DiagnosticoRepository>();
 
 var app = builder.Build();
 

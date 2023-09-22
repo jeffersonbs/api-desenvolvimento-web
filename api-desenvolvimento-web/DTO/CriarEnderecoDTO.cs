@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace api_desenvolvimento_web.DTO
 {
-    public class CriarEndereco
+    public class CriarEnderecoDTO
     {
         public string Logradouro { get; set; }
 

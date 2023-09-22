@@ -2,7 +2,7 @@
 
 namespace api_desenvolvimento_web.DTO
 {
-    public class AtualizarCID
+    public class AtualizarCIDDTO
     {
         [Required]
         public int Id { get; set; }

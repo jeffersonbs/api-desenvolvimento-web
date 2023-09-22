@@ -54,7 +54,7 @@ namespace api_desenvolvimento_web.Controllers
             var model = _mapper.Map<Paciente>(paciente);
             _pacienterepository.Adicionar(model);
 
-            return Ok(paciente);
+            return Created("Paciente cadastrado com sucesso",paciente);
         }
 
         [HttpPut]

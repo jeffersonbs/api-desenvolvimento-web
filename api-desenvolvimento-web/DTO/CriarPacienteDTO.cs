@@ -15,16 +15,8 @@ namespace api_desenvolvimento_web.DTO
         public string? NomePai { get; set; }
         public string? NomeMae { get; set; }
         public string? NumeroFone { get; set; }
-        public CriarEndereco? Endereco { get; set; }
-        public int? EnderecoId { get; set; }
+        public CriarEnderecoDTO? Endereco { get; set; }
+        public ICollection<Diagnostico>? Diagnosticos {get; set;}
         public ICollection<Atendimento>? Atendimentos { get; private set; }
-    }
-
-    public class CriarProfissionalDTO
-    {
-        public string Nome { get; set; }
-        public string NumeroConselho { get; set; }
-        public string UFConselho { get; set; }
-        public string Especialidade { get; set; }
     }
 }

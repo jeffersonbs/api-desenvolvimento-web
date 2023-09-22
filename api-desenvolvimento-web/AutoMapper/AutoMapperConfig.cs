@@ -14,14 +14,16 @@ namespace api_desenvolvimento_web.AutoMapper
             CreateMap<ResetarSenhaModel, ResetarSenhaDTO>().ReverseMap();
             CreateMap<Paciente, CriarPacienteDTO>().ReverseMap();
             CreateMap<Paciente, AtualizarPacienteDTO>().ReverseMap();
-            CreateMap<Endereco, CriarEndereco>().ReverseMap();
+            CreateMap<Endereco, CriarEnderecoDTO>().ReverseMap();
             CreateMap<Endereco, AtualizarEnderecoDTO>().ReverseMap();
             CreateMap<Profissional, CriarProfissionalDTO>().ReverseMap();
             CreateMap<Profissional, AtualizarProfissionalDTO>().ReverseMap();
             CreateMap<Atendimento, CriarAtendimentoDTO>().ReverseMap();
             CreateMap<Atendimento, AtualizarAtendimentoDTO>().ReverseMap();
             CreateMap<CID, CriarCID>().ReverseMap();
-            CreateMap<CID, AtualizarCID>().ReverseMap();
+            CreateMap<CID, AtualizarCIDDTO>().ReverseMap();
+            CreateMap<Diagnostico, CriarDiagnosticoDTO>().ReverseMap();
+            CreateMap<Diagnostico, AtualizarDiagnosticoDTO>().ReverseMap();
         }
     }
 }
