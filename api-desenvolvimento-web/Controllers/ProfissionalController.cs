@@ -86,7 +86,7 @@ namespace api_desenvolvimento_web.Controllers
             var profissional = await _profissionalrepository.ObterProfissionalPorId(id);
             if (profissional == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
             _profissionalrepository.Deletar(profissional);

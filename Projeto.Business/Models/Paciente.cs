@@ -20,6 +20,7 @@ namespace Projeto.Business.Models
         public string NomeMae { get; set; }
         public string NumeroFone { get; set; }
         public Endereco? Endereco { get; set; }
+        public Diagnostico? Diagnostico { get; set; }
         public int? EnderecoId { get; set; }
         public ICollection<Atendimento>? Atendimentos { get; private set; }
     }

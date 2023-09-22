@@ -96,7 +96,7 @@ namespace api_desenvolvimento_web.Controllers
             var paciente = await _pacienterepository.ObterPacientePorId(id);
             if(paciente == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
             _pacienterepository.Deletar(paciente);

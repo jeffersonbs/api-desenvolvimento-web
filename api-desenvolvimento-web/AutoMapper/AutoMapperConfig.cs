@@ -20,6 +20,8 @@ namespace api_desenvolvimento_web.AutoMapper
             CreateMap<Profissional, AtualizarProfissionalDTO>().ReverseMap();
             CreateMap<Atendimento, CriarAtendimentoDTO>().ReverseMap();
             CreateMap<Atendimento, AtualizarAtendimentoDTO>().ReverseMap();
+            CreateMap<CID, CriarCID>().ReverseMap();
+            CreateMap<CID, AtualizarCID>().ReverseMap();
         }
     }
 }

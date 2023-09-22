@@ -91,7 +91,7 @@ namespace api_desenvolvimento_web.Controllers
             var atendimento = await _atendimentorepository.ObterAtendimentoPorId(id);
             if (atendimento == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
             _atendimentorepository.Deletar(atendimento);
