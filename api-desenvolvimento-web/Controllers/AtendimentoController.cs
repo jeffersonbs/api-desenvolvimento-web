@@ -23,12 +23,19 @@ namespace api_desenvolvimento_web.Controllers
         }
 
         [HttpGet]
-        [Route("listaratendimentos")]
-        public async Task<IActionResult> ObterAtendimentos()
+        [Route("listaratendimentos/{pagina}")]
+        public async Task<IActionResult> ObterAtendimentos(int pagina)
         {
-            var atendimentos = await _atendimentorepository.ListarAtendimentos();
+            var numeropaginas = Math.Ceiling(_atendimentorepository.NumeroAtendimentos() / 10f);
+            var atendimentos = await _atendimentorepository.ListarAtendimentos(pagina);
 
-            return Ok(atendimentos);
+            var resposta = new ListarAtendimentosDTO
+            {
+                Atendimentos = atendimentos,
+                PaginaAtual = pagina,
+                NumeroPaginas = (int)numeropaginas,
+            };
+            return Ok(resposta);
         }
 
         [HttpGet]

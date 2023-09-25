@@ -26,12 +26,20 @@ namespace api_desenvolvimento_web.Controllers
         }
 
         [HttpGet]
-        [Route("listardiagnosticos")]
-        public async Task<IActionResult> ObterDiagnosticos()
+        [Route("listardiagnosticos/{pagina}")]
+        public async Task<IActionResult> ObterDiagnosticos(int pagina)
         {
-            var diagnosticos = await _diagnosticorepository.ListarDiagnostico();
+            var numeropaginas = Math.Ceiling(_diagnosticorepository.NumeroDiagnosticos() / 10f);
+            var diagnosticos = await _diagnosticorepository.ListarDiagnostico(pagina);
 
-            return Ok(diagnosticos);
+            var resposta = new ListarDiagnosticosDTO
+            {
+                Diagnosticos = diagnosticos,
+                PaginaAtual = pagina,
+                NumeroPaginas = (int)numeropaginas,
+            };
+
+            return Ok(resposta);
         }
 
         [HttpGet]

@@ -42,9 +42,16 @@ namespace Projeto.Data.Repository
             _contexto.Dispose();
         }
 
-        public async Task<List<Diagnostico>> ListarDiagnostico()
+        public async Task<List<Diagnostico>> ListarDiagnostico(int pagina)
         {
-            return await _contexto.Diagnosticos.Include(x => x.CIDs).ToListAsync();
+            return await _contexto.Diagnosticos.Include(x => x.CIDs).Skip((pagina - 1) * (int)(10f))
+                .Take((int)10f)
+                .ToListAsync();
+        }
+
+        public int NumeroDiagnosticos()
+        {
+            return _contexto.Diagnosticos.Count();
         }
 
         public async Task<Diagnostico> ObterDiagnosticoPorId(int id)

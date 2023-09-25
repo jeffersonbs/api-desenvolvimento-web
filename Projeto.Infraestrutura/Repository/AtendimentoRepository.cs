@@ -42,9 +42,18 @@ namespace Projeto.Data.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<List<Atendimento>> ListarAtendimentos()
+        public async Task<List<Atendimento>> ListarAtendimentos(int pagina)
         {
-            return await _contexto.Atendimentos.ToListAsync();
+            return await _contexto
+                .Atendimentos
+                .Skip((pagina - 1) * (int)(10f))
+                .Take((int)10f)
+                .ToListAsync();
+        }
+
+        public int NumeroAtendimentos()
+        {
+            return _contexto.Atendimentos.Count();
         }
 
         public async Task<Atendimento> ObterAtendimentoPorId(int id)

@@ -25,12 +25,20 @@ namespace api_desenvolvimento_web.Controllers
         }
 
         [HttpGet]
-        [Route("listarpacientes")]
-        public async Task<IActionResult> ObterPacientes()
+        [Route("listarpacientes/{pagina}")]
+        public async Task<IActionResult> ObterPacientes(int pagina)
         {
-            var pacientes = await _pacienterepository.ListarPacientes();
+            var numeropaginas = Math.Ceiling(_pacienterepository.NumeroPacientes() / 10f);
+            var pacientes = await _pacienterepository.ListarPacientes(pagina);
 
-            return Ok(pacientes);
+            var resposta = new ListarPacientesDTO
+            {
+                Pacientes = pacientes,
+                PaginaAtual = pagina,
+                NumeroPaginas = (int)numeropaginas
+            };
+
+            return Ok(resposta);
         }
 
         [HttpGet]

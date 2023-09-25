@@ -25,11 +25,14 @@ namespace Projeto.Data.Repository
             _contexto.SaveChanges();
         }
 
-        public async Task<List<Paciente>> ListarPacientes()
+        public async Task<List<Paciente>> ListarPacientes(int pagina)
         {
            return await _contexto.Pacientes
+                .Include(x => x.Atendimentos)
                 .Include(x => x.Endereco)
                 .Include(x => x.Diagnostico)
+                .ThenInclude(x => x.CIDs).Skip((pagina - 1) * (int)(10f))
+                .Take((int)10f)
                 .ToListAsync();
         }
         public void Dispose()
@@ -63,6 +66,11 @@ namespace Projeto.Data.Repository
         public async Task<Endereco> ObterEnderecoPorId(int id)
         {
             return await _contexto.Enderecos.FindAsync(id);
+        }
+
+        public int NumeroPacientes()
+        {
+            return _contexto.Pacientes.Count();
         }
     }
 }

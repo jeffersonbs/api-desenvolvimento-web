@@ -36,9 +36,16 @@ namespace Projeto.Data.Repository
             _contexto.Dispose();
         }
 
-        public async Task<List<CID>> ListarCID()
+        public async Task<List<CID>> ListarCID(int pagina)
         {
-            return await _contexto.CIDs.ToListAsync();
+            return await _contexto.CIDs.Skip((pagina - 1) * (int)(10f))
+                .Take((int)10f)
+                .ToListAsync();
+        }
+
+        public int NumeroCIDs()
+        {
+            return _contexto.CIDs.Count();
         }
 
         public async Task<CID> ObterCIDPorId(int id)

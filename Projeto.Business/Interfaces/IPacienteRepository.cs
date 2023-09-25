@@ -9,12 +9,13 @@ namespace Projeto.Business.Interfaces
 {
     public interface IPacienteRepository : IDisposable
     {
-        Task<List<Paciente>> ListarPacientes();
+        Task<List<Paciente>> ListarPacientes(int pagina);
         Task<Paciente> ObterPacientePorId(int id);
         Task Adicionar(Paciente paciente);
         Task Atualizar(Paciente paciente);
         Task Deletar(Paciente paciente);
         Task AtualizarEndereco(Endereco endereco);
         Task<Endereco> ObterEnderecoPorId(int id);
+        int NumeroPacientes();
     }
 }

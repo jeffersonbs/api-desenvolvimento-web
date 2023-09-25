@@ -23,12 +23,20 @@ namespace api_desenvolvimento_web.Controllers
         }
 
         [HttpGet]
-        [Route("listarcids")]
-        public async Task<IActionResult> ObterCIDs()
+        [Route("listarcids/{pagina}")]
+        public async Task<IActionResult> ObterCIDs(int pagina)
         {
-            var cids = await _cidrepository.ListarCID();
+            var numeropaginas = Math.Ceiling(_cidrepository.NumeroCIDs() / 10f);
+            var cids = await _cidrepository.ListarCID(pagina);
 
-            return Ok(cids);
+            var resposta = new ListarCIDsDTO
+            {
+                CIDs = cids,
+                PaginaAtual = pagina,
+                NumeroPaginas = (int)numeropaginas
+            };
+
+            return Ok(resposta);
         }
 
         [HttpGet]

@@ -35,9 +35,16 @@ namespace Projeto.Data.Repository
             _contexto.Dispose();
         }
 
-        public async Task<List<Profissional>> ListarProfissional()
+        public async Task<List<Profissional>> ListarProfissional(int pagina)
         {
-            return await _contexto.Profissionais.ToListAsync();
+            return await _contexto.Profissionais.Skip((pagina - 1) * (int)(10f))
+                .Take((int)10f)
+                .ToListAsync();
+        }
+
+        public int NumeroProfissionais()
+        {
+            return _contexto.Profissionais.Count();
         }
 
         public async Task<Profissional> ObterProfissionalPorId(int id)

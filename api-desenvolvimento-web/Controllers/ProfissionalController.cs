@@ -23,12 +23,20 @@ namespace api_desenvolvimento_web.Controllers
         }
 
         [HttpGet]
-        [Route("listarprofissionais")]
-        public async Task<IActionResult> ObterProfissionais()
+        [Route("listarprofissionais/{pagina}")]
+        public async Task<IActionResult> ObterProfissionais(int pagina)
         {
-            var profissionais = await _profissionalrepository.ListarProfissional();
+            var numeropaginas = Math.Ceiling(_profissionalrepository.NumeroProfissionais() / 10f);
+            var profissionais = await _profissionalrepository.ListarProfissional(pagina);
 
-            return Ok(profissionais);
+            var resposta = new ListarProfissionaisDTO
+            {
+                Profissional = profissionais,
+                PaginaAtual = pagina,
+                NumeroPaginas = (int)numeropaginas
+            };
+
+            return Ok(resposta);
         }
 
         [HttpGet]
