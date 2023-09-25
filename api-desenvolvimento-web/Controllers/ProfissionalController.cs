@@ -98,7 +98,7 @@ namespace api_desenvolvimento_web.Controllers
             }
 
             _profissionalrepository.Deletar(profissional);
-            return Ok();
+            return NoContent();
         }
     }
 }

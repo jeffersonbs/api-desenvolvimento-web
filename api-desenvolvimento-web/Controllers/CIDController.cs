@@ -97,7 +97,7 @@ namespace api_desenvolvimento_web.Controllers
             }
 
             _cidrepository.Deletar(cid);
-            return Ok();
+            return NoContent();
         }
     }
 

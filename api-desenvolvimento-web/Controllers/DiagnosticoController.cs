@@ -120,7 +120,7 @@ namespace api_desenvolvimento_web.Controllers
 
             _diagnosticorepository.AdicionarDiagnosticoCID(diagnostico, cid);
 
-            return Ok();
+            return NoContent();
         }
 
     }

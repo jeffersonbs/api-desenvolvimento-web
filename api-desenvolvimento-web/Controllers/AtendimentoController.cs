@@ -102,7 +102,7 @@ namespace api_desenvolvimento_web.Controllers
             }
 
             _atendimentorepository.Deletar(atendimento);
-            return Ok();
+            return NoContent();
         }
     }
 }

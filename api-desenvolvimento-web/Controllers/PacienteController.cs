@@ -108,7 +108,7 @@ namespace api_desenvolvimento_web.Controllers
             }
 
             _pacienterepository.Deletar(paciente);
-            return Ok();
+            return NoContent();
         }
         [HttpPost]
         [Route("atualizarendereco")]
